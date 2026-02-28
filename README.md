@@ -48,4 +48,4 @@ npm run build
 
 ## 📚 Contexto
 
-Projeto desenvolvido como exercício do curso de React da [Alura](https://www.alura.com.br/), com foco no uso do hook `useState` para gerenciamento de estado.
+Projeto desenvolvido como exercício do curso de React da [Alura], com foco no uso do hook `useState` para gerenciamento de estado.
