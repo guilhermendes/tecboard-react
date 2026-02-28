@@ -1,28 +1,85 @@
+import { useState } from "react";
 import "./App.css";
-
-function FormularioDeEvento() {
-  return (
-    <form className="form-evento">
-      <h2>Preencha para criar um evento:</h2>
-      <fieldset>
-        <label htmlFor="">Qual o nome evento?</label>
-        <input type="text" id="nome" />
-      </fieldset>
-    </form>
-  );
-}
+import { Banner } from "./componentes/Banner/Banner";
+import { CardEvento } from "./componentes/CardEvento";
+import { FormularioDeEvento } from "./componentes/FormularioDeEvento";
+import { Tema } from "./componentes/Tema";
 
 function App() {
+  const temas = [
+    {
+      id: 1,
+      nome: "front-end",
+    },
+    {
+      id: 2,
+      nome: "back-end",
+    },
+    {
+      id: 3,
+      nome: "deveops",
+    },
+    {
+      id: 4,
+      nome: "inteligencia artificial",
+    },
+    {
+      id: 5,
+      nome: "data science",
+    },
+    {
+      id: 6,
+      nome: "cloud",
+    },
+  ];
+
+  const [eventos, setEventos] = useState([
+    {
+      capa: "https://raw.githubusercontent.com/viniciosneves/tecboard-assets/refs/heads/main/imagem_1.png",
+      tema: temas[0],
+      data: new Date(),
+      titulo: "Mulheres no Front",
+    },
+  ]);
+
+  function adicionarEvento(evento) {
+    setEventos([...eventos, evento]);
+  }
+
   return (
     <main>
       <header>
         <img src="/logo-tecboard.png" alt="" />
       </header>
 
-      <section>
-        <img src="banner.png" alt="" />
+      <Banner />
+      <FormularioDeEvento temas={temas} aoSubmeter={adicionarEvento} />
+
+      <section className="container">
+        {temas.map(function (tema) {
+          if (
+            !eventos.some(function (evento) {
+              return evento.tema.id == tema.id;
+            })
+          ) {
+            return null;
+          }
+          return (
+            <section key={tema.id}>
+              <Tema tema={tema} />
+              <div className="eventos">
+                {eventos
+                  .filter(function (evento) {
+                    return evento.tema.id == tema.id;
+                  })
+                  .map(function (evento, index) {
+                    return <CardEvento evento={evento} key={index} />;
+                  })}
+              </div>
+            </section>
+          );
+        })}
       </section>
-      <FormularioDeEvento />
     </main>
   );
 }
