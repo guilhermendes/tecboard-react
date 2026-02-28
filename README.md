@@ -45,7 +45,6 @@ npm run build
 
 - [React](https://react.dev/)
 - CSS Modules
-- [ViaCEP API](https://viacep.com.br/) _(utilizada em exercícios anteriores)_
 
 ## 📚 Contexto
 
